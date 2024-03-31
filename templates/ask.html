@@ -36,25 +36,51 @@
       </div>
     </nav>
 
-    <main class="container-sm-fluid container-lg mt-3">
-      <div class="d-flex gap-3 align-imens-center">
-        <h1 class="new_questions">New questions</h1>
-        <a href="hot.html" class="link">Hot questions</a>
+    <main class="container-sm-fluid container-lg mt-1">
+      <div class="d-flex gap-3 align-items-center">
+        <h1 class="new_question">New question</h1>
       </div>
 
       <div class="row">
         <div class="col-md-10 sm-12 bg-light">
+          <div class="row">
+            <div class="mt-3 mb-3 d-flex align-items-center">
+              <div class="col-1 ps-2">
+                <label for="label_title" class="form-label">Title</label>
+              </div>
+              <div class="col-11 pe-2">  
+                <input type="text" class="form-control" id="title_input" placeholder="How to build a moon park?">
+              </div>
+            </div>
+          </div>
 
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </nav>
+          <div class="row">
+            <div class="mt-3 mb-3 d-flex align-items-start">
+              <div class="col-1 ps-2">
+                <label for="label_question" class="form-label">Text</label>
+              </div>
+              <div class="col-11 pe-2">
+                <textarea class="form-control" id="question_textarea" rows="15" placeholder="Really, how?
+Have no idea about it"></textarea>
+              </div>
+            </div>
+          </div>
 
+          <div class="row">
+            <div class="mt-3 mb-3 d-flex align-items-center">
+              <div class="col-1 ps-2">
+                <label for="label_tags" class="form-label">Tags</label>
+              </div>
+              <div class="col-11 pe-2">  
+                <input type="text" class="form-control" id="tags_input" placeholder="moon, park, puzzle">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="ms-2 mb-3 col-1 btn btn-outline-success">ASK!</div>
+          </div>
         </div>
 
         <div class="col-2">
