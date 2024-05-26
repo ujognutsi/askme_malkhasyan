@@ -22,7 +22,8 @@ class QuestionManager(models.Manager):
         return self.annotate(likes=Coalesce(models.Sum('questionlike'), 0)).order_by('-likes')
 
     def get_new(self):
-        return self.filter(created_at__day=date.today())
+        return self.order_by("created_at").reverse
+        #return self.filter(created_at__day=date.today().day)
 
 class Question(models.Model):
     title = models.CharField(max_length=255)
@@ -43,7 +44,7 @@ class Answer(models.Model):
     text = models.CharField(max_length=65535)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    vr = models.CharField(max_length=12)
+    #vr = models.CharField(max_length=12)
 
     def __str__(self):
         return self.title
