@@ -16,10 +16,18 @@ class Tag(models.Model):
 
 class QuestionManager(models.Manager):
     def get_by_tag(self, Tag):
-        return self.filter(Tag in self.tags)
-    
+        return self.filter(tags__name__icontains=Tag)
+
     def get_hot(self):
-        return self.annotate(likes=Coalesce(models.Sum('questionlike'), 0)).order_by('-likes')
+        # SELECT question FROM questionlikes WHERE 
+        # return self.annotate(likes=Coalesce(models.Sum('questionlike'), 0)).order_by('-likes')
+        # q = self.get().id
+        # return self.order_by(Answer.objects.filter(question=q).count).reverse()[0:10]
+
+
+        # вывести вопросы сортировкой по убыванию суммы questionlike с question == id
+        # SELECT * FROM question ORDER BY COUNT(SELECT * FROM questionlike WHERE question == id)
+        pass
 
     def get_new(self):
         return self.order_by("created_at").reverse
@@ -64,9 +72,12 @@ class QuestionLikeManager(models.Manager):
 
 class QuestionLike(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    unique_together = [
-        ['question_id', 'user_id']
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    # unique_together = [
+    #     ['question', 'user']
+    # ]
+    constraints = [
+        models.UniqueConstraint(fields=['question', 'user'], name='unique like')
     ]
 
     def __str__(self):
@@ -77,14 +88,11 @@ class AnswerLikeManager(models.Manager):
 
 class AnswerLike(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     unique_together = [
-        ['answer_id', 'user_id']
+        ['answer', 'user']
     ]
 
     def __str__(self):
         return self.answer_id
     
-
-# вывести вопросы сортировкой по убыванию суммы questionlike с question_id == id
-# SELECT * FROM question ORDER BY COUNT(SELECT * FROM questionlike WHERE questiion_id == id)
