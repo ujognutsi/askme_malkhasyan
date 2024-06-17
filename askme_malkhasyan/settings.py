@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'bootstrap5'
+    'bootstrap5',
+    'wsgi_test'
 ]
 
 MIDDLEWARE = [
